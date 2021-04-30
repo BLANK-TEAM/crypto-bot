@@ -1,14 +1,13 @@
-const Usermodel = require(`../../models/User`)
-const bot = require(`../../telegram`)
-const { ButtonOne } = require(`./helpers`)
-const { Scenes } = require("telegraf")
+const {Scenes:{BaseScene,Stage},Markup} = require('telegraf')
+const StartTypeScene = new BaseScene('START_TYPE_SCENE_ID')
+const Usermodel = require('../../models/User')
+const Config = require('../../locales/ru.json')
 
+const forwardButton = Markup.keyboard(['Вперед🚀']).oneTime()
 
-Start.enter(async(ctx)=>{
-    const UserID = ctx.update.message.from.id
-
+StartTypeScene.enter((ctx)=>{
     Usermodel.findOne({
-        UserID
+        UserID: ctx.update.message.from.id
     }).then(async(doc)=>{
         if(doc) return
         if(!doc){
@@ -16,11 +15,15 @@ Start.enter(async(ctx)=>{
                 Username:ctx.update.message.from.first_name,
                 UserID:ctx.update.message.from.id
             })
-
+    
             await newUser.save()
         }
     })
-   await ctx.reply(``, ButtonOne())
-
+    ctx.reply(Config.scenes.start.welcomeMessage, forwardButton.resize(true))
 })
-module.exports = Start
+
+StartTypeScene.hears('Вперед🚀', ctx => {
+    ctx.reply(Config.scenes.start.SubInfo)
+})
+
+module.exports = StartTypeScene
