@@ -14,8 +14,12 @@ const User = mongoose.Schema({
         type:Number,
         default:0
     },
-    Subscription:{
-        type:String
+    is_paid: {
+        type: Boolean,
+        default: false
+    },
+    next_date_payment: {
+        type: Date
     },
     UserID:{
         type:String

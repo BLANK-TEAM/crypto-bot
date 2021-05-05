@@ -1,7 +1,7 @@
 const {Telegraf, session, Scenes:{Stage},Markup} = require('telegraf')
 const mongoose = require("mongoose")
 require('dotenv').config()
-const bot = new Telegraf(process.env.Bot_token)
+const bot = require('./telegram')
 const StartTypeScene = require('./controllers/start/index')
 
 const Start = require(`./controllers/start/index`)
@@ -9,7 +9,8 @@ const Start = require(`./controllers/start/index`)
 mongoose.connect("mongodb+srv://SkyDraw:24681323asd@cluster0.dgxtl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: true
 })
     .then(() => console.log('db connected'))
     .catch(err => console.error(err))
