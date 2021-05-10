@@ -1,5 +1,4 @@
-const mongoose = require("mongoose")
-
+import mongoose from "mongoose"
 
 const User = mongoose.Schema({
     Username:{
@@ -9,6 +8,10 @@ const User = mongoose.Schema({
     Balance:{
         type:Number,
         default:0
+    },
+    RefProc:{
+        type:String,
+        default:'15%'
     },
     Refs:{
         type:Number,
@@ -27,4 +30,4 @@ const User = mongoose.Schema({
 })
 
 const Usermodel = mongoose.model(`@user`,User)
-module.exports = Usermodel
+export default Usermodel

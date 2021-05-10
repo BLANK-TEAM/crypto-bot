@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon --experimental-json-modules index.js"
   },
   "author": "Jojo",
   "license": "ISC",
   "dependencies": {
+    "@telegraf/session": "^1.0.1",
     "dotenv": "^8.2.0",
     "moment": "^2.29.1",
     "mongoose": "^5.12.6",
     "nodemon": "^2.0.7",
     "telegraf": "^4.3.0"
-  }
+  },
+  "type": "module"
 }

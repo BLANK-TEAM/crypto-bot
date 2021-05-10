@@ -1,7 +1,7 @@
-const moment = require('moment');
-const Usermodel = require('../models/User');
+import moment from 'moment';
+import Usermodel from '../models/User.js';
 
-const verifyPayment = (id, ctx) => {
+export const verifyPayment = (id, ctx) => {
     Usermodel.findOne({ UserID: id }).then((user) => {
         if (!user) return;
         if (user) {
@@ -16,7 +16,7 @@ const verifyPayment = (id, ctx) => {
     })
 }
 
-const calculateNextPayment = async (planType, date) => {
+export const calculateNextPayment = async (planType, date) => {
     let currentDate;
     if (!planType) return null
 
@@ -42,7 +42,7 @@ const calculateNextPayment = async (planType, date) => {
     }
 }
 
-const mockPayment = (id) => {
+export const mockPayment = (id) => {
     try {
         Usermodel.findOne({ UserID: id }).then((user) => {
             user.is_paid = true
@@ -53,5 +53,3 @@ const mockPayment = (id) => {
         console.error(e)
     }
 }
-
-module.exports = { calculateNextPayment, verifyPayment, mockPayment }
